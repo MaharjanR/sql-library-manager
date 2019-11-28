@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Books = require('../db/model').Books;
+const { Books } = require('../db').models;
 
 router.get('/', async (req,res) => {
     const books = await Books.findAll();

@@ -1,0 +1,27 @@
+{
+  "name": "sql-library-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CataLight/sql-library-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CataLight/sql-library-manager/issues"
+  },
+  "homepage": "https://github.com/CataLight/sql-library-manager#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4",
+    "sequelize": "^5.21.2",
+    "sqlite3": "^4.1.0"
+  }
+}

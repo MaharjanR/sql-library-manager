@@ -16,15 +16,30 @@ function asyncHandler(cb){
     }
 }
 
-// Display all the books
-router.get('/', asyncHandler( async (req,res) => {
-    const books = await Books.findAll();
-    if(books){
-        res.render('books/index', { books });
+// Display the first page
+router.get('/', (req,res) => {
+    res.redirect('/page/1');    
+});
+
+// Display books depending upon search
+router.get('/page/:id', asyncHandler( async (req,res) => {
+
+    // pagination setup
+    const tempBooks = await Books.findAll();
+    const pageNum = req.params.id;
+    const page = 5;
+    const offset = (pageNum * page) - page;
+    const pagination = Math.floor( tempBooks.length / page ) + 1;
+
+    const books = await Books.findAll({limit: page, offset: offset});
+
+    if(books.length > 0){
+        res.render('books/index', { books , pagination: pagination});
     }
     else{
         res.render('books/error');
     }
+    
 }));
 
 // Display the create book section
@@ -43,7 +58,7 @@ router.post('/',  asyncHandler( async(req,res) => {
         // checking the error
         if(error.name === "SequelizeValidationError") { 
             book = await Books.build(req.body);
-            res.render("books/new-book", { book, errors: error.errors })
+            res.render('books/new-book', { book, errors: error.errors })
         }
         else {
             // error caught in the asyncHandler's catch block
@@ -80,8 +95,7 @@ router.post('/books/:id',  asyncHandler( async (req,res) => {
          // checking the error
          if(error.name === "SequelizeValidationError") { 
             book = await Books.build(req.body);
-            book.id = req.params.id;
-            res.render("/books/" + book.id, { book, errors: error.errors })
+            res.render('books/update-book', { book, errors: error.errors })
         }
         else {
             // error caught in the asyncHandler's catch block

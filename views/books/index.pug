@@ -20,3 +20,10 @@ block content
                 td= book.author
                 td= book.genre
                 td= book.year
+        
+
+    - var n = 1;
+        while n <= pagination
+            ul.pagination
+                li 
+                    a(href=`/page/${n}`)= n++

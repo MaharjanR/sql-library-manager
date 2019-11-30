@@ -2,6 +2,12 @@ extends ../layout
 block content
     h1 New Book
     form(action="/" method="post")
+        if(errors)
+            h2.error Oooops!
+                ul.error
+                    li Title is required
+                    li Author is required
+
         p
             label(for='title') Title
             input#title(name='title', type='text')

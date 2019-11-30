@@ -13,6 +13,19 @@ app.use(bodyParser.json());
 
 app.use(mainRoute);
 
+app.use( (req, res, next) => {
+    const err = new Error('Page not found');
+    err.status = 404;
+    next(err);
+});
+
+// renders the error page if no routes found
+app.use( (err, req, res, next) => {
+    res.locals.error = err;
+    res.status(err.status);
+    res.render('books/error');
+});
+
 app.listen('3000', () =>{
     console.log('It is running in localhost:3000');
 })

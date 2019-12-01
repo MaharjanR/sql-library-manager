@@ -6,8 +6,8 @@ block content
         if(errors)
             h2.error Oooops!
                 ul.error
-                    li Title is required
-                    li Author is required
+                    each error in errors
+                        li= error.message
         p
             label(for='title') Title
             input#title(name='title', type='text', value=`${book.title}`)

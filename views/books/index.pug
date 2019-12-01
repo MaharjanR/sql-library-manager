@@ -2,28 +2,32 @@ extends ../layout
 
 block content
     h1 Books
-    p
-        a.button(href='/create') Create New Book
-    table
-        thead
-            tr
-            th Title
-            th Author
-            th Genre
-            th Year
-        tbody
-        //- use loop here
-        each book in books
-            tr
-                td
-                    a(href=`/books/${book.id}`)= book.title
-                td= book.author
-                td= book.genre
-                td= book.year
+    .container
+        p
+            a.button(href='/create') Create New Book
         
+            input(type='search' name='search' value='search')
 
-    - var n = 1;
-        while n <= pagination
-            ul.pagination
-                li 
-                    a(href=`/page/${n}`)= n++
+        table
+            thead
+                tr
+                th Title
+                th Author
+                th Genre
+                th Year
+            tbody
+            //- use loop here
+            each book in books
+                tr
+                    td
+                        a(href=`/books/${book.id}`)= book.title
+                    td= book.author
+                    td= book.genre
+                    td= book.year
+            
+
+        - var n = 1;
+            while n <= pagination
+                ul.pagination
+                    li 
+                        a(href=`/page/${n}`)= n++
